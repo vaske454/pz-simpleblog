@@ -1,0 +1,9 @@
+/* Import page-specific styles */
+@import url('pages/home.css');
+@import url('pages/login.css');
+@import url('pages/register.css');
+
+/* Import component styles */
+@import url('components/popup-login.css');
+@import url('components/login-form.css');
+@import url('components/register-form.css');

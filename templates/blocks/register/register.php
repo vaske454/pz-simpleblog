@@ -1,10 +1,10 @@
-<h1>Login</h1>
-<form method="post" action="/login">
+<h1>Register</h1>
+<form class="register-form" method="post" action="/register">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required>
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required>
-    <button type="submit">Login</button>
+    <button type="submit">Register</button>
 </form>
-<p>Don't have an account? <a href="/register">Sign up</a></p>
+<p>Already have an account? <a href="/login">Login</a></p>
 <p><a href="/">Go to Homepage</a></p>

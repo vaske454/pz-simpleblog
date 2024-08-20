@@ -1,4 +1,3 @@
-import '../css/home.css';
 const $ = jQuery.noConflict();
 
 'use strict';
@@ -33,7 +32,4 @@ const Home = {
     }
 };
 
-// DOM ready
-$(document).ready(function() {
-    Home.init();
-});
+export default Home;

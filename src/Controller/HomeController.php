@@ -10,7 +10,8 @@ class HomeController
 {
     public function index(Request $request): Response
     {
-        $view = new View(__DIR__ . '/../../templates/home.php');
+        $title = 'Home - My Blog';
+        $view = new View(__DIR__ . '/../../templates/pages/home.php', $title);
 
         return new Response($view->render());
     }

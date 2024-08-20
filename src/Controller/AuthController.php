@@ -10,14 +10,16 @@ class AuthController
 {
     public function login(Request $request): Response
     {
-        $view = new View(__DIR__ . '/../../templates/login.php');
+        $title = 'Login - My Blog';
+        $view = new View(__DIR__ . '/../../templates/pages/login.php', $title);
 
         return new Response($view->render());
     }
 
     public function register(Request $request): Response
     {
-        $view = new View(__DIR__ . '/../../templates/register.php');
+        $title = 'Register - My Blog';
+        $view = new View(__DIR__ . '/../../templates/pages/register.php', $title);
 
         return new Response($view->render());
     }

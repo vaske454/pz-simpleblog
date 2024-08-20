@@ -1,3 +1,11 @@
-example:
+home:
   path: /
-  controller: App\Controller\ExampleController::execute
+  controller: App\Controller\HomeController::index
+
+login:
+  path: /login
+  controller: App\Controller\AuthController::login
+
+register:
+  path: /register
+  controller: App\Controller\AuthController::register

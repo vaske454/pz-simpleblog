@@ -1,0 +1,3 @@
+example:
+  path: /
+  controller: App\Controller\ExampleController::execute

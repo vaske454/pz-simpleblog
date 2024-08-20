@@ -1,0 +1,13 @@
+{
+  "name": "pz/simple-blog",
+  "description": "A simple blog application using pure PHP.",
+  "type": "project",
+  "require": {
+    "php": "^8.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  }
+}

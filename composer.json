@@ -3,7 +3,7 @@
   "description": "A simple blog application using pure PHP.",
   "type": "project",
   "require": {
-    "php": "^8.2"
+    "php": "^5.6"
   },
   "autoload": {
     "psr-4": {

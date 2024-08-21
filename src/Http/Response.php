@@ -4,14 +4,14 @@ namespace App\Http;
 
 class Response
 {
-    protected string $content;
+    protected $content;
 
-    public function __construct(string $content = '')
+    public function __construct($content = '')
     {
         $this->content = $content;
     }
 
-    public function getContent(): string
+    public function getContent()
     {
         return $this->content;
     }

@@ -8,25 +8,25 @@ use App\Util\YamlParser;
 
 class Router
 {
-    private array $routes;
+    private $routes;
 
     public function __construct()
     {
         $this->loadRoutes();
     }
 
-    private function loadRoutes(): void
+    private function loadRoutes()
     {
         $yamlFile = __DIR__ . '/../../config/routes.yaml';
         $yaml = YamlParser::parseFile($yamlFile);
-        $this->routes = [];
+        $this->routes = array();
 
         foreach ($yaml as $route) {
             $this->routes[$route['path']] = $route['controller'];
         }
     }
 
-    public function execute(Request $request): Response
+    public function execute(Request $request)
     {
         $path = $request->getPath();
 

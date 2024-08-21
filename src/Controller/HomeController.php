@@ -8,7 +8,7 @@ use App\Service\View;
 
 class HomeController
 {
-    public function index(Request $request): Response
+    public function index(Request $request)
     {
         $title = 'Home - My Blog';
         $view = new View(__DIR__ . '/../../templates/pages/home.php', $title);

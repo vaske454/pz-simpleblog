@@ -1,7 +1,7 @@
 name: pz-simpleblog
 type: php
 docroot: public
-php_version: "8.2"
+php_version: "5.6"
 webserver_type: nginx-fpm
 xdebug_enabled: false
 additional_hostnames: []
@@ -10,7 +10,7 @@ database:
     type: mariadb
     version: "10.11"
 use_dns_when_possible: true
-composer_version: "2"
+composer_version: "2.2.18"
 web_environment: []
 corepack_enable: false
 

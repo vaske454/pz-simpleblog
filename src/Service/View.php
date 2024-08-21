@@ -4,18 +4,18 @@ namespace App\Service;
 
 class View
 {
-    protected string $templatePath;
-    protected ?string $title;
-    protected array $data;
+    protected $templatePath;
+    protected $title;
+    protected $data;
 
-    public function __construct(string $templatePath, ?string $title = null, array $data = [])
+    public function __construct($templatePath, $title = null, $data = [])
     {
         $this->templatePath = $templatePath;
         $this->title = $title;
         $this->data = $data;
     }
 
-    public function render(): string
+    public function render()
     {
         $title = $this->title;
         extract($this->data);

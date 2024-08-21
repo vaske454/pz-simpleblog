@@ -8,7 +8,7 @@ use App\Service\View;
 
 class AuthController
 {
-    public function login(Request $request): Response
+    public function login(Request $request)
     {
         $title = 'Login - My Blog';
         $view = new View(__DIR__ . '/../../templates/pages/login.php', $title);
@@ -16,7 +16,7 @@ class AuthController
         return new Response($view->render());
     }
 
-    public function register(Request $request): Response
+    public function register(Request $request)
     {
         $title = 'Register - My Blog';
         $view = new View(__DIR__ . '/../../templates/pages/register.php', $title);

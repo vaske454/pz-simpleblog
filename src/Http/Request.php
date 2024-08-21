@@ -4,19 +4,19 @@ namespace App\Http;
 
 class Request
 {
-    protected array $parameters;
+    protected $parameters;
 
-    public function __construct(array $parameters = [])
+    public function __construct($parameters = [])
     {
         $this->parameters = $parameters;
     }
 
     public function get($name, $default = null)
     {
-        return $this->parameters[$name] ?? $default;
+        return isset($this->parameters[$name]) ? $this->parameters[$name] : $default;
     }
 
-    public function getPath(): string
+    public function getPath()
     {
         return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     }

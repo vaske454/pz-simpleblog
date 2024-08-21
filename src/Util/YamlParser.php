@@ -4,13 +4,13 @@ namespace App\Util;
 
 class YamlParser
 {
-    public static function parseFile(string $filename): array
+    public static function parseFile($filename)
     {
         $yaml = file_get_contents($filename);
         return self::parse($yaml);
     }
 
-    private static function parse(string $yaml): array
+    private static function parse($yaml)
     {
         $lines = explode("\n", trim($yaml));
         $result = [];

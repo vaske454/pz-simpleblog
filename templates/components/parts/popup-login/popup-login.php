@@ -10,6 +10,5 @@
             <button type="submit">Login</button>
         </form>
         <p>Don't have an account? <a href="/register">Sign up</a></p>
-        <p><a href="/">Go to Homepage</a></p>
     </div>
 </div>

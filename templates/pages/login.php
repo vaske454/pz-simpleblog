@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="en">
 <?php require '../templates/head.php'; ?>
-<body class="main">
-
-<!-- Login block-->
-<?php require '../templates/blocks/login/login.php'; ?>
-
+<body>
+<!-- Main Content -->
+<main>
+    <!-- Login block-->
+    <?php require '../templates/components/blocks/login/login.php'; ?>
+</main>
 <!-- Footer Scripts -->
-<?php require '../templates/footer/scripts.php'; ?>
-<script src="/build/js/site.bundle.js"></script>
+<?php require '../templates/scripts/footer-scripts.php'; ?>
 </body>
 </html>

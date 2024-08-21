@@ -4,6 +4,6 @@
 @import url('pages/register.css');
 
 /* Import component styles */
-@import url('components/popup-login.css');
-@import url('components/login-form.css');
-@import url('components/register-form.css');
+@import url('components/parts/popup-login.css');
+@import url('components/blocks/login-form.css');
+@import url('components/blocks/register-form.css');

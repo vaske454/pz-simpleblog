@@ -27,13 +27,21 @@ class LoginService
             return ['redirect' => '/'];
         }
 
-        if (empty($username) || empty($password)) {
+        if (empty($username) && empty($password)) {
             throw new AuthenticationException('Username and password cannot be empty', 1001);
+        }
+
+        if (empty($username)) {
+            throw new AuthenticationException('Username cannot be empty', 1002);
+        }
+
+        if (empty($password)) {
+            throw new AuthenticationException('Password cannot be empty', 1003);
         }
 
         $user = User::authenticate($username, $password);
         if (!$user) {
-            throw new AuthenticationException('Invalid username or password', 1002);
+            throw new AuthenticationException('Invalid username or password', 1004);
         }
 
         $_SESSION['user'] = $user;

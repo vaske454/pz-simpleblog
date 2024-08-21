@@ -8,6 +8,12 @@ use App\Service\View;
 
 class HomeController
 {
+    public function __construct()
+    {
+        // Start the session for all requests to the controller
+        session_start();
+    }
+
     public function index(Request $request)
     {
         $title = 'Home - My Blog';

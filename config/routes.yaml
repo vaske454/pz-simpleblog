@@ -4,12 +4,12 @@ home:
 
 login:
   path: /login
-  controller: App\Controller\AuthController::login
+  controller: App\Controller\LoginController::login
 
 register:
   path: /register
-  controller: App\Controller\AuthController::register
+  controller: App\Controller\RegisterController::register
 
 logout:
   path: /logout
-  controller: App\Controller\AuthController::logout
+  controller: App\Controller\LogoutController::logout

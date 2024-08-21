@@ -8,6 +8,8 @@ const Home = {
         this.bindLoginLinkClick();
         this.bindPopupCloseClick();
         this.bindWindowClick();
+        this.bindFormSubmit();
+        this.bindPopupFormSubmit();
     },
 
     bindLoginLinkClick: function() {
@@ -29,6 +31,64 @@ const Home = {
                 $('#login-popup').css('display', 'none');
             }
         });
+    },
+
+    bindFormSubmit: function() {
+        $('.login-form').on('submit', function(event) {
+            // Clear previous errors
+            $('.error-message').remove();
+
+            // Validate fields
+            let isValid = true;
+            if (!Home.validateUsername()) {
+                isValid = false;
+            }
+            if (!Home.validatePassword()) {
+                isValid = false;
+            }
+
+            if (!isValid) {
+                event.preventDefault(); // Prevent form submission if validation fails
+            }
+        });
+    },
+
+    bindPopupFormSubmit: function() {
+        $('.login-popup').on('submit', function(event) {
+            // Clear previous errors
+            $('.error-message').remove();
+
+            // Validate fields
+            let isValid = true;
+            if (!Home.validateUsername()) {
+                isValid = false;
+            }
+            if (!Home.validatePassword()) {
+                isValid = false;
+            }
+
+            if (!isValid) {
+                event.preventDefault(); // Prevent form submission if validation fails
+            }
+        });
+    },
+
+    validateUsername: function() {
+        const username = $('#username').val().trim();
+        if (!username) {
+            $('#username').after('<div class="error-message">Username is required.</div>');
+            return false;
+        }
+        return true;
+    },
+
+    validatePassword: function() {
+        const password = $('#password').val().trim();
+        if (!password) {
+            $('#password').after('<div class="error-message">Password is required.</div>');
+            return false;
+        }
+        return true;
     }
 };
 

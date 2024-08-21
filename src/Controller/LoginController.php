@@ -25,7 +25,8 @@ class LoginController
         }
 
 
-        $error = null;
+        $errorMessage = null;
+        $errorCode = null;
 
         try {
             if ($request->isPost()) {
@@ -39,12 +40,13 @@ class LoginController
                 }
             }
         } catch (AuthenticationException $e) {
-            $error = $e->getMessage();
+            $errorMessage = $e->getMessage();
+            $errorCode = $e->getCode();
             error_log("Error: " . $e->getMessage() . " Code: " . $e->getCode());
         }
 
         $title = 'Login - My Blog';
-        $view = new View(__DIR__ . '/../../templates/pages/login.php', $title, ['error' => $error]);
+        $view = new View(__DIR__ . '/../../templates/pages/login.php', $title, ['error_message' => $errorMessage, 'error_code' => $errorCode]);
 
         return new Response($view->render());
     }

@@ -35,17 +35,23 @@
     font-size: 24px;
 }
 
-.login-popup {
+/* Login Popup specific styling */
+.form-group {
     display: flex;
     flex-direction: column;
 }
 
-.login-popup label {
+.login-btn {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
     margin-top: 10px;
     font-weight: bold;
 }
 
-.login-popup input {
+.form-group input {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -64,6 +70,13 @@
 
 .login-popup button:hover {
     background-color: #555;
+}
+
+/* Error messages */
+.error-message {
+    color: red;
+    font-size: 0.875em;
+    margin-top: 5px;
 }
 
 /* Responsive Design */

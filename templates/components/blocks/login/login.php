@@ -17,12 +17,12 @@
     <form class="login-form js-login-form" method="post" action="/login">
         <div class="form-group">
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username">
+            <input class="js-username" type="text" id="username" name="username" required>
             <div class="error-message" id="username-error"></div>
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password">
+            <input class="js-password" type="password" id="password" name="password" required>
             <div class="error-message" id="password-error"></div>
         </div>
         <button type="submit">Login</button>

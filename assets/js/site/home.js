@@ -54,7 +54,7 @@ const Home = {
     },
 
     validateUsername: function() {
-        const username = $('#username').val().trim();
+        const username = $('.js-username').val().trim();
         if (!username) {
             $('#username').after('<div class="error-message">Username is required.</div>');
             return false;
@@ -63,7 +63,7 @@ const Home = {
     },
 
     validatePassword: function() {
-        const password = $('#password').val().trim();
+        const password = $('.js-password').val().trim();
         if (!password) {
             $('#password').after('<div class="error-message">Password is required.</div>');
             return false;

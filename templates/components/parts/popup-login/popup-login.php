@@ -5,12 +5,12 @@
         <form class="login-popup js-login-popup" method="post" action="/login" novalidate>
             <div class="form-group">
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
+                <input class="js-username" type="text" id="username" name="username" required>
                 <div class="error-message" id="username-error"></div>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <input class="js-password" type="password" id="password" name="password" required>
                 <div class="error-message" id="password-error"></div>
             </div>
             <div class="login-btn">

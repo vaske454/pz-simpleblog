@@ -14,7 +14,7 @@
     <?php endif; ?>
 
     <!-- Login form -->
-    <form class="login-form" method="post" action="/login">
+    <form class="login-form js-login-form" method="post" action="/login">
         <div class="form-group">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username">

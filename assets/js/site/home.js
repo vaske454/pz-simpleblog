@@ -8,8 +8,8 @@ const Home = {
         this.bindLoginLinkClick();
         this.bindPopupCloseClick();
         this.bindWindowClick();
-        this.bindFormSubmit();
-        this.bindPopupFormSubmit();
+        this.bindFormSubmit('.js-login-form');
+        this.bindFormSubmit('.js-login-popup');
     },
 
     bindLoginLinkClick: function() {
@@ -33,28 +33,8 @@ const Home = {
         });
     },
 
-    bindFormSubmit: function() {
-        $('.login-form').on('submit', function(event) {
-            // Clear previous errors
-            $('.error-message').remove();
-
-            // Validate fields
-            let isValid = true;
-            if (!Home.validateUsername()) {
-                isValid = false;
-            }
-            if (!Home.validatePassword()) {
-                isValid = false;
-            }
-
-            if (!isValid) {
-                event.preventDefault(); // Prevent form submission if validation fails
-            }
-        });
-    },
-
-    bindPopupFormSubmit: function() {
-        $('.login-popup').on('submit', function(event) {
+    bindFormSubmit: function(selector) {
+        $(selector).on('submit', function(event) {
             // Clear previous errors
             $('.error-message').remove();
 

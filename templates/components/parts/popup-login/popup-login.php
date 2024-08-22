@@ -2,7 +2,7 @@
     <div class="popup-content">
         <span class="popup-close" id="popup-close">&times;</span>
         <h2>Login</h2>
-        <form class="login-popup" method="post" action="/login" id="login-form" novalidate>
+        <form class="login-popup js-login-popup" method="post" action="/login" novalidate>
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>

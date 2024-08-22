@@ -1,7 +1,7 @@
 const $ = jQuery.noConflict();
 
 'use strict';
-const Home = {
+const Login = {
 
     // Initialize
     init: function() {
@@ -40,10 +40,10 @@ const Home = {
 
             // Validate fields
             let isValid = true;
-            if (!Home.validateUsername()) {
+            if (!Login.validateUsername()) {
                 isValid = false;
             }
-            if (!Home.validatePassword()) {
+            if (!Login.validatePassword()) {
                 isValid = false;
             }
 
@@ -65,11 +65,11 @@ const Home = {
     validatePassword: function() {
         const password = $('.js-password').val().trim();
         if (!password) {
-            $('#password').after('<div class="error-message">Password is required.</div>');
+            $('.password-container-login').after('<div class="error-message">Password is required.</div>');
             return false;
         }
         return true;
     }
 };
 
-export default Home;
+export default Login;

@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Exception\RegistrationException;
 use PDO;
 
 class User
@@ -26,6 +27,9 @@ class User
         return null;
     }
 
+    /**
+     * @throws RegistrationException
+     */
     public static function create($username, $password)
     {
         $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
@@ -34,9 +38,7 @@ class User
         if ($stmt->execute(['username' => $username, 'password' => $passwordHash])) {
             return self::authenticate($username, $password);
         } else {
-            // Print error information for debugging
-            print_r($stmt->errorInfo());
-            return null;
+            throw new RegistrationException($stmt->errorInfo()[2], 2006);
         }
     }
 }

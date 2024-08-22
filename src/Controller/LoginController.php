@@ -42,7 +42,7 @@ class LoginController
         } catch (AuthenticationException $e) {
             $errorMessage = $e->getMessage();
             $errorCode = $e->getCode();
-            error_log("Error: " . $e->getMessage() . " Code: " . $e->getCode());
+            error_log("Error: " . $errorMessage . " Code: " . $errorCode);
         }
 
         $title = 'Login - My Blog';

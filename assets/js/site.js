@@ -1,7 +1,9 @@
 import '../css/globals.css';
-import Home from './site/home';
+import Login from './site/login';
+import Register from './site/register';
 
 // DOM ready
 jQuery(function() {
-    Home.init();
+    Login.init();
+    Register.init();
 });

@@ -41,4 +41,12 @@ class User
             throw new RegistrationException($stmt->errorInfo()[2], 2006);
         }
     }
+
+    public static function getById($id)
+    {
+        $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
+        $stmt = $db->prepare('SELECT username FROM users WHERE id = :id');
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

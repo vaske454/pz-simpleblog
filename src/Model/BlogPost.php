@@ -26,8 +26,23 @@ class BlogPost
     public static function getAll()
     {
         $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
-        $stmt = $db->query('SELECT * FROM blog_posts');
+        $stmt = $db->query('SELECT * FROM blog_posts ORDER BY publication_date DESC');
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Get a blog post by ID
+     *
+     * @param int $id
+     * @return array|null
+     * @throws \Exception
+     */
+    public static function getById($id)
+    {
+        $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
+        $stmt = $db->prepare('SELECT * FROM blog_posts WHERE id = :id');
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
 }

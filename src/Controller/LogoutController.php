@@ -21,7 +21,17 @@ class LogoutController
             if ($this->logoutService->isLoggedIn()) {
                 $this->logoutService->logout();
             }
-            header('Location: /');
+            // Get the referrer URL or use the current URL if referrer is not available
+            $referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
+
+            // Check if the referrer URL contains "single-product" (or any indicator for single product page)
+            if (strpos($referrer, 'single-product') === false) {
+                // Redirect to the referrer page
+                header('Location: ' . $referrer);
+            } else {
+                // Redirect to the homepage if the referrer indicates a single product page
+                header('Location: /');
+            }
             exit();
         } catch (SessionException $e) {
             error_log("Error: " . $e->getMessage() . " Code: " . $e->getCode());

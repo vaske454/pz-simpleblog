@@ -15,12 +15,16 @@
 
     <!-- Login form -->
     <form class="login-form" method="post" action="/login">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username">
-        <div class="error-message" id="username-error"></div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password">
-        <div class="error-message" id="password-error"></div>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+            <div class="error-message" id="username-error"></div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+            <div class="error-message" id="password-error"></div>
+        </div>
         <button type="submit">Login</button>
     </form>
     <p>Don't have an account? <a href="/register">Sign up</a></p>

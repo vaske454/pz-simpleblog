@@ -42,5 +42,23 @@ class CreateBlogService
 
         BlogPost::create($title, $content, $userId);
     }
+
+
+    /**
+     * @throws \Exception
+     */
+    public function getBlogPostById($id)
+    {
+        $blogPost = BlogPost::getById($id);
+
+        if ($blogPost) {
+            // Fetch username based on user_id
+            $user = User::getById($blogPost['user_id']);
+            $blogPost['username'] = $user['username'];
+            unset($blogPost['user_id']); // Remove user_id if you don't want to display it
+        }
+
+        return $blogPost;
+    }
     
 }

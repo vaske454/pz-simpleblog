@@ -10,9 +10,13 @@ register:
   path: /register
   controller: App\Controller\RegisterController::register
 
-create-blog:
+create_blog:
   path: /create-blog
   controller: App\Controller\CreateBlogController::index
+
+single_blog:
+  path: /single-blog
+  controller: App\Controller\SingleBlogController::execute
 
 logout:
   path: /logout

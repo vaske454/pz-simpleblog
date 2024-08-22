@@ -10,6 +10,9 @@
                         <span>Welcome, <?php echo htmlspecialchars($_SESSION['user']->username); ?></span>
                     </li>
                     <li>
+                        <a href="/create-blog" aria-label="Create Blog">Create Blog</a>
+                    </li>
+                    <li>
                         <a href="/logout" aria-label="Logout">Logout</a>
                     </li>
                 <?php else: ?>

@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Controller\CreateBlogController;
 use App\Controller\LoginController;
 use App\Controller\RegisterController;
 use App\Controller\LogoutController;
@@ -25,6 +26,12 @@ class Container
         };
         $this->services[RegistrationService::class] = function() {
             return new RegistrationService();
+        };
+        $this->services[CreateBlogController::class] = function() {
+            return new CreateBlogController($this->get(CreateBlogService::class));
+        };
+        $this->services[CreateBlogService::class] = function() {
+            return new CreateBlogService();
         };
         $this->services[LogoutController::class] = function() {
             return new LogoutController($this->get(LogoutService::class));

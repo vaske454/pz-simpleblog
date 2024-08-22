@@ -21,7 +21,7 @@
     margin-top: 5px;
 }
 
-.login-form button {
+.login-button {
     padding: 10px;
     border: none;
     border-radius: 4px;
@@ -31,8 +31,32 @@
     margin-top: 10px;
 }
 
-.login-form button:hover {
+.login-button:hover {
     background-color: #555;
+}
+
+.password-container-login {
+    position: relative;
+    width: 100%; /* Adjust width as needed */
+}
+
+.password-container-login input[id="password"] {
+    width: 100%;
+    padding-right: 70px; /* Make space for the button */
+    box-sizing: border-box;
+}
+
+.password-container-login .js-toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Adjust this value to fit your design */
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #007bff; /* Or any color you prefer */
+    font-size: 16px; /* Adjust size if necessary */
+    z-index: 1; /* Ensure the button is above the input */
 }
 
 /* Responsive Design */

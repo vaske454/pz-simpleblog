@@ -1,15 +1,15 @@
 const $ = jQuery.noConflict();
 
 'use strict';
-const Home = {
+const Login = {
 
     // Initialize
     init: function() {
         this.bindLoginLinkClick();
         this.bindPopupCloseClick();
         this.bindWindowClick();
-        this.bindFormSubmit();
-        this.bindPopupFormSubmit();
+        this.bindFormSubmit('.js-login-form');
+        this.bindFormSubmit('.js-login-popup');
     },
 
     bindLoginLinkClick: function() {
@@ -33,37 +33,17 @@ const Home = {
         });
     },
 
-    bindFormSubmit: function() {
-        $('.login-form').on('submit', function(event) {
+    bindFormSubmit: function(selector) {
+        $(selector).on('submit', function(event) {
             // Clear previous errors
             $('.error-message').remove();
 
             // Validate fields
             let isValid = true;
-            if (!Home.validateUsername()) {
+            if (!Login.validateUsername()) {
                 isValid = false;
             }
-            if (!Home.validatePassword()) {
-                isValid = false;
-            }
-
-            if (!isValid) {
-                event.preventDefault(); // Prevent form submission if validation fails
-            }
-        });
-    },
-
-    bindPopupFormSubmit: function() {
-        $('.login-popup').on('submit', function(event) {
-            // Clear previous errors
-            $('.error-message').remove();
-
-            // Validate fields
-            let isValid = true;
-            if (!Home.validateUsername()) {
-                isValid = false;
-            }
-            if (!Home.validatePassword()) {
+            if (!Login.validatePassword()) {
                 isValid = false;
             }
 
@@ -74,7 +54,7 @@ const Home = {
     },
 
     validateUsername: function() {
-        const username = $('#username').val().trim();
+        const username = $('.js-username').val().trim();
         if (!username) {
             $('#username').after('<div class="error-message">Username is required.</div>');
             return false;
@@ -83,13 +63,13 @@ const Home = {
     },
 
     validatePassword: function() {
-        const password = $('#password').val().trim();
+        const password = $('.js-password').val().trim();
         if (!password) {
-            $('#password').after('<div class="error-message">Password is required.</div>');
+            $('.password-container-login').after('<div class="error-message">Password is required.</div>');
             return false;
         }
         return true;
     }
 };
 
-export default Home;
+export default Login;

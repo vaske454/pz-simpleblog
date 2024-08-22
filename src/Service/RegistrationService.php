@@ -19,8 +19,14 @@ class RegistrationService
 
     public function isValidPassword($password)
     {
-        $pattern = '/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/';
+        $pattern = '/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,32}$/';
         return preg_match($pattern, $password);
+    }
+
+    public function isValidUsername($username)
+    {
+        $pattern = '/^[a-zA-Z0-9._-]{3,30}$/';
+        return preg_match($pattern, $username);
     }
 
     /**
@@ -28,12 +34,24 @@ class RegistrationService
      */
     public function register($username, $password)
     {
-        if (strlen($username) > 30) {
-            throw new RegistrationException('Username cannot be longer than 30 characters.', 2001);
+        if (empty($username) && empty($password)) {
+            throw new RegistrationException('Username and password cannot be empty', 2001);
+        }
+
+        if (empty($username)) {
+            throw new RegistrationException('Username cannot be empty', 2002);
+        }
+
+        if (!$this->isValidUsername($username)) {
+            throw new RegistrationException('Username must be 3-30 characters long and can only include letters, numbers, dots, underscores, and hyphens.', 2003);
+        }
+
+        if (empty($password)) {
+            throw new RegistrationException('Password cannot be empty', 2004);
         }
 
         if (!$this->isValidPassword($password)) {
-            throw new RegistrationException('Password must be at least 8 characters long, contain at least one uppercase letter, one number, and one special character.', 2002);
+            throw new RegistrationException('Password must be 8-32 characters long, contain at least one uppercase letter, one number, and one special character.', 2005);
         }
 
         $user = User::create($username, $password);
@@ -41,7 +59,7 @@ class RegistrationService
             $_SESSION['user'] = $user;
             return $user;
         } else {
-            throw new RegistrationException('Registration failed', 2003);
+            return null;
         }
     }
 }

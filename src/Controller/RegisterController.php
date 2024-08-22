@@ -19,13 +19,13 @@ class RegisterController
 
     public function register(Request $request)
     {
-//        var_dump($this->registrationService->isLoggedIn());die();
         if ($this->registrationService->isLoggedIn()) {
             header('Location: /');
             exit();
         }
 
-        $error = null;
+        $errorMessage = null;
+        $errorCode = null;
 
         try {
             if ($request->isPost()) {
@@ -39,12 +39,13 @@ class RegisterController
                 }
             }
         } catch (RegistrationException $e) {
-            $error = $e->getMessage();
-            error_log("Error: " . $e->getMessage() . " Code: " . $e->getCode());
+            $errorMessage = $e->getMessage();
+            $errorCode = $e->getCode();
+            error_log("Error: " . $errorMessage . " Code: " . $errorCode);
         }
 
         $title = 'Register - My Blog';
-        $view = new View(__DIR__ . '/../../templates/pages/register.php', $title, ['error' => $error]);
+        $view = new View(__DIR__ . '/../../templates/pages/register.php', $title, ['error_message' => $errorMessage, 'error_code' => $errorCode]);
 
         return new Response($view->render());
     }

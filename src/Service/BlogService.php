@@ -42,5 +42,39 @@ class BlogService
 
         BlogPost::create($title, $content, $userId, $categoryId);
     }
-    
+
+    /**
+     * @throws \Exception
+     */
+    public function updateBlogPost($blogId, $title, $content, $categoryId)
+    {
+        if (!$this->isLoggedIn()) {
+            throw new \Exception('User is not logged in.');
+        }
+
+        $userId = $this->getUserId();
+        if ($userId === null) {
+            throw new \Exception('User ID not found.');
+        }
+
+        BlogPost::update($blogId, $title, $content, $userId, $categoryId);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function deleteBlogPost($blogId)
+    {
+        if (!$this->isLoggedIn()) {
+            throw new \Exception('User is not logged in.');
+        }
+
+        $userId = $this->getUserId();
+        if ($userId === null) {
+            throw new \Exception('User ID not found.');
+        }
+
+        BlogPost::delete($blogId, $userId);
+    }
+
 }

@@ -49,4 +49,27 @@ class BlogPost
         }
     }
 
+    public static function update($blogId, $title, $content, $userId, $categoryId)
+    {
+        $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
+        $stmt = $db->prepare('UPDATE blog_posts SET title = :title, content = :content, category_id = :category_id WHERE id = :id AND user_id = :user_id');
+        $stmt->execute([
+            ':title' => $title,
+            ':content' => $content,
+            ':category_id' => $categoryId,
+            ':id' => $blogId,
+            ':user_id' => $userId
+        ]);
+    }
+
+    public static function delete($blogId, $userId)
+    {
+        $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
+        $stmt = $db->prepare('DELETE FROM blog_posts WHERE id = :id AND user_id = :user_id');
+        $stmt->execute([
+            ':id' => $blogId,
+            ':user_id' => $userId
+        ]);
+    }
+
 }

@@ -104,3 +104,25 @@
     margin-bottom: 5px;
     color: #333;
 }
+
+/* Delete Button */
+.delete-button {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+    background-color: #c9302c;
+}
+
+

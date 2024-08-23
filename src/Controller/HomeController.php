@@ -25,21 +25,28 @@ class HomeController
     {
         $title = 'Home - My Blog';
         $blogs = BlogPost::getAll();
+        $currentUser = User::getCurrentUser();
+
+//        $isMyPost = false;
+
 
         foreach ($blogs as &$blog) {
-            $user = User::getById($blog['user_id']);
+            $user = User::getUsernameById($blog['user_id']);
             if ($user) {
                 $blog['username'] = $user['username'];
             }
 
+            if ($blog['user_id'] === $currentUser['id']) {
+                $blog['is_my_post'] = true;
+            } else {
+                $blog['is_my_post'] = false;
+            }
+
             $date = new DateTime($blog['publication_date']);
-
             $dateOnly = $date->format('d-m-Y');
-
             $blog['publication_date'] = $dateOnly;
 
             $category = Category::getCategoryById($blog['category_id']);
-
             if ($category) {
                 $blog['category_name'] = $category['name'];
             }

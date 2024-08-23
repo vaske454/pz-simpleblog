@@ -24,8 +24,8 @@ class UpdateBlogController
 
             // Validate input
             if (empty($title) || empty($content) || empty($categoryId) || empty($blogId)) {
-                echo 'All fields are required.';
-                return;
+                header('Location: /');
+                exit;
             }
 
             try {

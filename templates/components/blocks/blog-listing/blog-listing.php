@@ -7,12 +7,14 @@
                     <div class="blog-item">
                         <h2><?php echo htmlspecialchars(substr($blog['title'], 0, 50), ENT_QUOTES, 'UTF-8'); ?><?php echo strlen($blog['title']) > 50 ? '...' : ''; ?></h2>
                         <p><?php echo htmlspecialchars(substr($blog['content'], 0, 150), ENT_QUOTES, 'UTF-8'); ?><?php echo strlen($blog['content']) > 150 ? '...' : ''; ?></p>
-                        <?php if (!empty($blog['publication_date'])): ?>
-                            <p class="blog-date"><?php echo htmlspecialchars($blog['publication_date'], ENT_QUOTES, 'UTF-8'); ?></p>
-                        <?php endif; ?>
-                        <?php if (!empty($blog['category_name'])): ?>
-                            <p class="blog-category">Category: <i><?php echo htmlspecialchars($blog['category_name'], ENT_QUOTES, 'UTF-8'); ?></i></p>
-                        <?php endif; ?>
+                        <div class="blog-meta">
+                            <?php if (!empty($blog['category_name'])): ?>
+                                <p class="blog-category">Category: <i><?php echo htmlspecialchars($blog['category_name'], ENT_QUOTES, 'UTF-8'); ?></i></p>
+                            <?php endif; ?>
+                            <?php if (!empty($blog['publication_date'])): ?>
+                                <p class="blog-date"><?php echo htmlspecialchars($blog['publication_date'], ENT_QUOTES, 'UTF-8'); ?></p>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </a>
             <?php endforeach; ?>

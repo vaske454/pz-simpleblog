@@ -42,11 +42,29 @@ class User
         }
     }
 
-    public static function getById($id)
+    public static function getUsernameById($id)
     {
         $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
         $stmt = $db->prepare('SELECT username FROM users WHERE id = :id');
         $stmt->execute([':id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function getById($id)
+    {
+        $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
+        $stmt = $db->prepare('SELECT id, username FROM users WHERE id = :id');
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // New method to get the current user from the session
+    public static function getCurrentUser()
+    {
+        if (isset($_SESSION['user']->id)) {
+            return self::getById($_SESSION['user']->id);
+        }
+
+        return null;
     }
 }

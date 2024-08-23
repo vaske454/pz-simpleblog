@@ -14,6 +14,14 @@ create_blog:
   path: /create-blog
   controller: App\Controller\CreateBlogController::index
 
+update_blog:
+  path: /update-blog
+  controller: App\Controller\UpdateBlogController::updateBlogPost
+
+delete_blog:
+  path: /delete-blog
+  controller: App\Controller\DeleteBlogController::deleteBlogPost
+
 logout:
   path: /logout
   controller: App\Controller\LogoutController::logout

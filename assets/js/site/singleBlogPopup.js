@@ -26,10 +26,13 @@ const SingleBlogPopup = {
 
     // Open Blog Popup
     openBlogPopup: function (blog) {
+        console.log(blog);
         $('#popup-blog-title').val(blog.title);
         $('#popup-blog-author').text(blog.username || 'Unknown Author');
         $('#popup-blog-date').text(blog.publication_date);
         $('#popup-blog-content').text(blog.content);
+        $('#popup-blog-id').val(blog.id);
+        $('#delete-blog-id').val(blog.id);
 
         // Set selected category
         if (blog.category_id) {

@@ -25,9 +25,13 @@
     color: inherit;
 }
 
+.blog-item p {
+    text-align: unset;
+}
+
 .blog-item {
     box-sizing: border-box;
-    padding: 40px;
+    padding: 15px;
     background-color: #ffffff;
     border-radius: 6px;
     border: 1px solid #ddd;

@@ -6,8 +6,9 @@ use App\Controller\CreateBlogController;
 use App\Controller\LoginController;
 use App\Controller\RegisterController;
 use App\Controller\LogoutController;
-use App\Controller\SingleBlogController;
 use Exception;
+use PDO;
+use PDOException;
 
 class Container
 {
@@ -29,13 +30,10 @@ class Container
             return new RegistrationService();
         };
         $this->services[CreateBlogController::class] = function() {
-            return new CreateBlogController($this->get(CreateBlogService::class));
+            return new CreateBlogController($this->get(BlogService::class));
         };
-        $this->services[SingleBlogController::class] = function() {
-            return new SingleBlogController($this->get(CreateBlogService::class));
-        };
-        $this->services[CreateBlogService::class] = function() {
-            return new CreateBlogService();
+        $this->services[BlogService::class] = function() {
+            return new BlogService();
         };
         $this->services[LogoutController::class] = function() {
             return new LogoutController($this->get(LogoutService::class));
@@ -44,6 +42,18 @@ class Container
             return new LogoutService();
         };
         // Add other services and controllers
+
+        $this->createCategories();
+    }
+
+    private function createCategories()
+    {
+        try {
+            $categoryService = new CategoryService();
+            $categoryService->ensureCategories();
+        } catch (PDOException $e) {
+            echo 'Connection failed: ' . $e->getMessage();
+        }
     }
 
     public function has($id)

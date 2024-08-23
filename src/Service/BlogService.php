@@ -5,7 +5,7 @@ namespace App\Service;
 use App\Model\BlogPost;
 use App\Model\User;
 
-class CreateBlogService
+class BlogService
 {
     public function __construct()
     {
@@ -29,7 +29,7 @@ class CreateBlogService
     /**
      * @throws \Exception
      */
-    public function createBlogPost($title, $content)
+    public function createBlogPost($title, $content, $categoryId)
     {
         if (!$this->isLoggedIn()) {
             throw new \Exception('User is not logged in.');
@@ -40,25 +40,7 @@ class CreateBlogService
             throw new \Exception('User ID not found.');
         }
 
-        BlogPost::create($title, $content, $userId);
-    }
-
-
-    /**
-     * @throws \Exception
-     */
-    public function getBlogPostById($id)
-    {
-        $blogPost = BlogPost::getById($id);
-
-        if ($blogPost) {
-            // Fetch username based on user_id
-            $user = User::getById($blogPost['user_id']);
-            $blogPost['username'] = $user['username'];
-            unset($blogPost['user_id']); // Remove user_id if you don't want to display it
-        }
-
-        return $blogPost;
+        BlogPost::create($title, $content, $userId, $categoryId);
     }
     
 }

@@ -18,6 +18,18 @@
             <label for="blog-content">Content:</label>
             <textarea id="blog-content" name="content" rows="5" required></textarea>
         </div>
+        <?php if (!empty($categories)): ?>
+        <div class="blog-form-group">
+            <label for="blog-category">Category:</label>
+            <select id="blog-category" name="category_id" required>
+                <?php foreach ($categories as $category): ?>
+                    <option value="<?php echo htmlspecialchars($category['id']); ?>">
+                        <?php echo htmlspecialchars($category['name']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <?php endif; ?>
         <button type="submit">Create Blog Post</button>
     </form>
 </div>

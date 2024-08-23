@@ -26,7 +26,7 @@ class BlogPost
     public static function getAll()
     {
         $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
-        $stmt = $db->query('SELECT * FROM blog_posts ORDER BY publication_date DESC');
+        $stmt = $db->query('SELECT id, title, content, user_id, DATE(publication_date) as publication_date FROM blog_posts ORDER BY publication_date DESC');
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -40,7 +40,7 @@ class BlogPost
     public static function getById($id)
     {
         $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
-        $stmt = $db->prepare('SELECT * FROM blog_posts WHERE id = :id');
+        $stmt = $db->prepare('SELECT id, title, content, user_id, DATE(publication_date) as publication_date FROM blog_posts WHERE id = :id');
         $stmt->execute([':id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }

@@ -29,13 +29,13 @@ class Container
             return new RegistrationService();
         };
         $this->services[CreateBlogController::class] = function() {
-            return new CreateBlogController($this->get(CreateBlogService::class));
+            return new CreateBlogController($this->get(BlogService::class));
         };
         $this->services[SingleBlogController::class] = function() {
-            return new SingleBlogController($this->get(CreateBlogService::class));
+            return new SingleBlogController($this->get(BlogService::class));
         };
-        $this->services[CreateBlogService::class] = function() {
-            return new CreateBlogService();
+        $this->services[BlogService::class] = function() {
+            return new BlogService();
         };
         $this->services[LogoutController::class] = function() {
             return new LogoutController($this->get(LogoutService::class));

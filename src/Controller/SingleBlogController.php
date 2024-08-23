@@ -4,14 +4,14 @@ namespace App\Controller;
 
 use App\Http\Request;
 use App\Http\Response;
-use App\Service\CreateBlogService;
+use App\Service\BlogService;
 use App\Service\View;
 
 class SingleBlogController
 {
     private $blogPostService;
 
-    public function __construct(CreateBlogService $blogPostService)
+    public function __construct(BlogService $blogPostService)
     {
         $this->blogPostService = $blogPostService;
     }

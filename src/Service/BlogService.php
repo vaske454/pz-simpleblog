@@ -5,7 +5,7 @@ namespace App\Service;
 use App\Model\BlogPost;
 use App\Model\User;
 
-class CreateBlogService
+class BlogService
 {
     public function __construct()
     {

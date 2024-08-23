@@ -45,7 +45,9 @@ class HomeController
             }
         }
 
-        $view = new View(__DIR__ . '/../../templates/pages/home.php', $title, ['blogs' => $blogs]);
+        $categories = Category::getCategories();
+
+        $view = new View(__DIR__ . '/../../templates/pages/home.php', $title, ['blogs' => $blogs, 'categories' => $categories]);
 
         return new Response($view->render());
     }

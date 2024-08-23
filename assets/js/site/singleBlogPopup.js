@@ -30,7 +30,12 @@ const SingleBlogPopup = {
         $('#popup-blog-author').text(blog.username || 'Unknown Author');
         $('#popup-blog-date').text(blog.publication_date);
         $('#popup-blog-content').text(blog.content);
-        $('#popup-blog-category').val(blog.category_name || 'N/A');
+
+        // Set selected category
+        if (blog.category_id) {
+            $('#popup-blog-category').val(blog.category_id);
+        }
+        // $('#popup-blog-category').val(blog.category_name || 'N/A');
 
         $('#blog-popup').show();
     },

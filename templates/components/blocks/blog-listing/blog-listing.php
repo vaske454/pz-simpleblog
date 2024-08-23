@@ -11,7 +11,7 @@
                             <p class="blog-date"><?php echo htmlspecialchars($blog['publication_date'], ENT_QUOTES, 'UTF-8'); ?></p>
                         <?php endif; ?>
                         <?php if (!empty($blog['category_name'])): ?>
-                            <p class="blog-category"><?php echo htmlspecialchars($blog['category_name'], ENT_QUOTES, 'UTF-8'); ?></p>
+                            <p class="blog-category">Category: <i><?php echo htmlspecialchars($blog['category_name'], ENT_QUOTES, 'UTF-8'); ?></i></p>
                         <?php endif; ?>
                     </div>
                 </a>

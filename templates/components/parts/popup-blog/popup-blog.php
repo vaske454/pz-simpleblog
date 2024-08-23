@@ -16,8 +16,14 @@
                 <textarea id="popup-blog-content" placeholder="Content"></textarea>
             </div>
             <footer class="blog-footer">
+                <?php if (!empty($categories)): ?>
                 <label for="popup-blog-category">Category:</label>
-                <input type="text" id="popup-blog-category" placeholder="Category ID" />
+                <select name="popup-blog-category" id="popup-blog-category">
+                    <?php foreach ($categories as $category): ?>
+                    <option value="<?= $category['id'] ?>"><?php echo $category['name']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <?php endif; ?>
                 <button id="save-blog-button" class="save-button">Save Changes</button>
             </footer>
         </article>

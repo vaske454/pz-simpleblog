@@ -14,10 +14,6 @@ create_blog:
   path: /create-blog
   controller: App\Controller\CreateBlogController::index
 
-single_blog:
-  path: /single-blog
-  controller: App\Controller\SingleBlogController::execute
-
 logout:
   path: /logout
   controller: App\Controller\LogoutController::logout

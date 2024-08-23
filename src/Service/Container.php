@@ -6,7 +6,6 @@ use App\Controller\CreateBlogController;
 use App\Controller\LoginController;
 use App\Controller\RegisterController;
 use App\Controller\LogoutController;
-use App\Controller\SingleBlogController;
 use Exception;
 
 class Container
@@ -30,9 +29,6 @@ class Container
         };
         $this->services[CreateBlogController::class] = function() {
             return new CreateBlogController($this->get(BlogService::class));
-        };
-        $this->services[SingleBlogController::class] = function() {
-            return new SingleBlogController($this->get(BlogService::class));
         };
         $this->services[BlogService::class] = function() {
             return new BlogService();

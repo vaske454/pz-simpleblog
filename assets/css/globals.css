@@ -3,10 +3,10 @@
 @import url('pages/login.css');
 @import url('pages/register.css');
 @import url('pages/create-blog.css');
-@import url('pages/single-blog.css');
 
 /* Import component styles */
 @import url('components/parts/popup-login.css');
+@import url('components/parts/popup-blog.css');
 @import url('components/blocks/login-form.css');
 @import url('components/blocks/register-form.css');
 @import url('components/blocks/blog-listing.css');

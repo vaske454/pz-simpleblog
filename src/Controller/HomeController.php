@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Http\Request;
 use App\Http\Response;
+use App\Model\User;
 use App\Service\View;
 use App\Model\BlogPost;
 
@@ -19,6 +20,15 @@ class HomeController
     {
         $title = 'Home - My Blog';
         $blogs = BlogPost::getAll();
+
+        foreach ($blogs as &$blog) {
+            $user = User::getById($blog['user_id']);
+            if ($user) {
+                $blog['username'] = $user['username'];
+            }
+            unset($blog['user_id']);
+        }
+
         $view = new View(__DIR__ . '/../../templates/pages/home.php', $title, ['blogs' => $blogs]);
 
         return new Response($view->render());

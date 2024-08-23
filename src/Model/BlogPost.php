@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use PDO;
+use PDOException;
 
 class BlogPost
 {
@@ -10,14 +11,15 @@ class BlogPost
     /**
      * @throws \Exception
      */
-    public static function create($title, $content, $userId)
+    public static function create($title, $content, $userId, $categoryId)
     {
         $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
-        $stmt = $db->prepare('INSERT INTO blog_posts (title, content, user_id) VALUES (:title, :content, :user_id)');
+        $stmt = $db->prepare('INSERT INTO blog_posts (title, content, user_id, category_id) VALUES (:title, :content, :user_id, :category_id)');
         if (!$stmt->execute([
             ':title' => $title,
             ':content' => $content,
-            ':user_id' => $userId
+            ':user_id' => $userId,
+            ':category_id' => $categoryId,
         ])) {
             throw new \Exception('Error creating blog post.');
         }
@@ -25,24 +27,26 @@ class BlogPost
 
     public static function getAll()
     {
-        $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
-        $stmt = $db->query('SELECT id, title, content, user_id, DATE(publication_date) as publication_date FROM blog_posts ORDER BY publication_date DESC');
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+        try {
+            $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
+            // Set error mode to exception
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    /**
-     * Get a blog post by ID
-     *
-     * @param int $id
-     * @return array|null
-     * @throws \Exception
-     */
-    public static function getById($id)
-    {
-        $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
-        $stmt = $db->prepare('SELECT id, title, content, user_id, DATE(publication_date) as publication_date FROM blog_posts WHERE id = :id');
-        $stmt->execute([':id' => $id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+            // Check if the table exists
+            $tableCheckStmt = $db->query('SHOW TABLES LIKE "blog_posts"');
+            if ($tableCheckStmt->rowCount() == 0) {
+                // Table does not exist
+                return []; // or handle the case as needed
+            }
+
+            // Fetch data from the table
+            $stmt = $db->query('SELECT id, title, content, user_id, publication_date, category_id FROM blog_posts ORDER BY publication_date DESC');
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            // Handle any errors, such as connection issues
+            error_log($e->getMessage());
+            return []; // or handle the error as needed
+        }
     }
 
 }

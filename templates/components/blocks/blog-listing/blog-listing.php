@@ -10,6 +10,9 @@
                         <?php if (!empty($blog['publication_date'])): ?>
                             <p class="blog-date"><?php echo htmlspecialchars($blog['publication_date'], ENT_QUOTES, 'UTF-8'); ?></p>
                         <?php endif; ?>
+                        <?php if (!empty($blog['category_name'])): ?>
+                            <p class="blog-category"><?php echo htmlspecialchars($blog['category_name'], ENT_QUOTES, 'UTF-8'); ?></p>
+                        <?php endif; ?>
                     </div>
                 </a>
             <?php endforeach; ?>
@@ -17,4 +20,6 @@
     </div>
 </div>
 
-<?php require '../templates/components/parts/popup-blog/popup-blog.php'; ?>
+<?php if (!empty($blogs)): ?>
+    <?php require '../templates/components/parts/popup-blog/popup-blog.php'; ?>
+<?php endif; ?>

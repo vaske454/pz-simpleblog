@@ -26,7 +26,8 @@
 }
 
 .blog-form-group input[type="text"],
-.blog-form-group textarea {
+.blog-form-group textarea,
+.blog-form-group select {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -38,6 +39,19 @@
 
 .blog-form-group textarea {
     resize: vertical;
+}
+
+.blog-form-group select {
+    background-color: #fff;
+    /* Optional: Add a border color for the select dropdown */
+    border: 1px solid #ccc;
+    /* Optional: Add padding for better appearance */
+    padding: 8px;
+}
+
+.blog-form-group select option {
+    /* Optional: Add padding for better readability of options */
+    padding: 10px;
 }
 
 .create-blog-form button {

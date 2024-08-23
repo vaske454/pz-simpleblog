@@ -26,11 +26,11 @@ const SingleBlogPopup = {
 
     // Open Blog Popup
     openBlogPopup: function (blog) {
-        $('#popup-blog-title').text(blog.title);
+        $('#popup-blog-title').val(blog.title);
         $('#popup-blog-author').text(blog.username || 'Unknown Author');
         $('#popup-blog-date').text(blog.publication_date);
         $('#popup-blog-content').text(blog.content);
-        $('#popup-blog-category').text(blog.category_id || 'N/A');
+        $('#popup-blog-category').val(blog.category_name || 'N/A');
 
         $('#blog-popup').show();
     },

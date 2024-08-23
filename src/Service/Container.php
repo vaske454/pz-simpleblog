@@ -7,6 +7,8 @@ use App\Controller\LoginController;
 use App\Controller\RegisterController;
 use App\Controller\LogoutController;
 use Exception;
+use PDO;
+use PDOException;
 
 class Container
 {
@@ -40,6 +42,18 @@ class Container
             return new LogoutService();
         };
         // Add other services and controllers
+
+        $this->createCategories();
+    }
+
+    private function createCategories()
+    {
+        try {
+            $categoryService = new CategoryService();
+            $categoryService->ensureCategories();
+        } catch (PDOException $e) {
+            echo 'Connection failed: ' . $e->getMessage();
+        }
     }
 
     public function has($id)

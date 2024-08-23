@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Http\Request;
 use App\Http\Response;
 use App\Service\BlogService;
+use App\Model\Category;
 use App\Service\View;
 
 class CreateBlogController
@@ -29,7 +30,8 @@ class CreateBlogController
         if ($request->isPost()) {
             $title = $request->get('title');
             $content = $request->get('content');
-            $this->createBlogService->createBlogPost($title, $content);
+            $categoryId = $request->get('category_id');
+            $this->createBlogService->createBlogPost($title, $content, $categoryId);
 
             header('Location: /');
             exit();
@@ -37,6 +39,11 @@ class CreateBlogController
 
         $title = 'Create Blog - My Blog';
         $view = new View(__DIR__ . '/../../templates/pages/create-blog.php', $title);
+
+        $categoryModel = new Category();
+        $categories = $categoryModel->getCategories();
+
+        $view->set('categories', $categories);
 
         return new Response($view->render());
     }

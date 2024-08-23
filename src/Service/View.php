@@ -15,6 +15,11 @@ class View
         $this->data = $data;
     }
 
+    public function set($key, $value)
+    {
+        $this->data[$key] = $value;
+    }
+
     public function render()
     {
         $title = $this->title;

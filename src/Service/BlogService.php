@@ -29,7 +29,7 @@ class BlogService
     /**
      * @throws \Exception
      */
-    public function createBlogPost($title, $content)
+    public function createBlogPost($title, $content, $categoryId)
     {
         if (!$this->isLoggedIn()) {
             throw new \Exception('User is not logged in.');
@@ -40,7 +40,7 @@ class BlogService
             throw new \Exception('User ID not found.');
         }
 
-        BlogPost::create($title, $content, $userId);
+        BlogPost::create($title, $content, $userId, $categoryId);
     }
     
 }

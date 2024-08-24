@@ -22,6 +22,10 @@ delete_blog:
   path: /delete-blog
   controller: App\Controller\DeleteBlogController::deleteBlogPost
 
+add_comment:
+  path: /add-comment
+  controller: App\Controller\AddCommentController::addComment
+
 logout:
   path: /logout
   controller: App\Controller\LogoutController::logout

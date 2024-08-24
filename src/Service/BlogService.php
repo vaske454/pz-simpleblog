@@ -77,4 +77,22 @@ class BlogService
         BlogPost::delete($blogId, $userId);
     }
 
+    /**
+     * @throws \Exception
+     */
+    public function createComment($blogId, $content)
+    {
+        if (!$this->isLoggedIn()) {
+            throw new \Exception('User is not logged in.');
+        }
+
+        $userId = $this->getUserId();
+        if ($userId === null) {
+            throw new \Exception('User ID not found.');
+        }
+        $username = User::getUsernameById($userId);
+
+        BlogPost::createComment($content, $blogId, $username['username']);
+    }
+
 }

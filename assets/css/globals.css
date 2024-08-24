@@ -7,6 +7,7 @@
 /* Import component styles */
 @import url('components/parts/popup-login.css');
 @import url('components/parts/popup-blog.css');
+@import url('components/parts/popup-add-comment.css');
 @import url('components/blocks/login-form.css');
 @import url('components/blocks/register-form.css');
 @import url('components/blocks/blog-listing.css');

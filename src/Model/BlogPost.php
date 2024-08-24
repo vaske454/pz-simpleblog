@@ -72,4 +72,17 @@ class BlogPost
         ]);
     }
 
+    public static function createComment($content, $blogId, $username)
+    {
+        $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
+        $stmt = $db->prepare('INSERT INTO comments (content, user_name, blog_post_id) VALUES (:content, :user_name, :blog_post_id)');
+        if (!$stmt->execute([
+            ':content' => $content,
+            ':user_name' => $username,
+            ':blog_post_id' => $blogId,
+        ])) {
+            throw new \Exception('Error creating blog post.');
+        }
+    }
+
 }

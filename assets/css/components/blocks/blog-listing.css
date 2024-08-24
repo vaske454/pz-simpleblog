@@ -30,6 +30,7 @@
 }
 
 .blog-item {
+    position: relative;
     box-sizing: border-box;
     padding: 15px;
     background-color: #ffffff;
@@ -57,7 +58,6 @@
 
 .blog-item p {
     font-size: 14px;
-    color: #555;
     line-height: 2;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -83,5 +83,14 @@
 .blog-date {
     margin: 0;
     text-align: right;
+}
+
+.is-my-post {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 12px;
+    color: #838181;
+    margin: 0;
 }
 

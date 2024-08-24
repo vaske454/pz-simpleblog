@@ -5,6 +5,11 @@
             <?php foreach ($blogs as $blog): ?>
                 <a href="#" class="blog-item-link" data-blog='<?php echo htmlspecialchars(json_encode($blog), ENT_QUOTES, 'UTF-8'); ?>'>
                     <div class="blog-item">
+                        <?php if ($blog['is_my_post']): ?>
+                        <p class="is-my-post">Editable</p>
+                        <?php else: ?>
+                        <p class="is-my-post">Uneditable</p>
+                        <?php endif; ?>
                         <h2><?php echo htmlspecialchars(substr($blog['title'], 0, 50), ENT_QUOTES, 'UTF-8'); ?><?php echo strlen($blog['title']) > 50 ? '...' : ''; ?></h2>
                         <p><?php echo htmlspecialchars(substr($blog['content'], 0, 150), ENT_QUOTES, 'UTF-8'); ?><?php echo strlen($blog['content']) > 150 ? '...' : ''; ?></p>
                         <div class="blog-meta">

@@ -27,9 +27,6 @@ class HomeController
         $blogs = BlogPost::getAll();
         $currentUser = User::getCurrentUser();
 
-//        $isMyPost = false;
-
-
         foreach ($blogs as &$blog) {
             $user = User::getUsernameById($blog['user_id']);
             if ($user) {

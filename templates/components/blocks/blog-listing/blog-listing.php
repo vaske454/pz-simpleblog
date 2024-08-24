@@ -24,10 +24,11 @@
                         </div>
                     </a>
                     <div class="blog-actions">
-                        <a href="#" class="view-comments js-view-comments">View Comments</a>
-                        <a href="#" class="add-comment js-add-comment" data-id="<?= $blog['id'] ?>">Add Comment</a>
+                        <a href="javascript:;" class="view-comments js-view-comments" data-id="<?= $blog['id'] ?>">View Comments</a>
+                        <a href="javascript:;" class="add-comment js-add-comment" data-id="<?= $blog['id'] ?>">Add Comment</a>
                     </div>
                 </div>
+                <?php require '../templates/components/parts/popup-view-comments/popup-view-comments.php'; ?>
                 <?php require '../templates/components/parts/popup-add-comment/popup-add-comment.php'; ?>
             <?php endforeach; ?>
         <?php endif; ?>

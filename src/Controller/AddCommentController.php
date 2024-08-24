@@ -25,8 +25,13 @@ class AddCommentController
 
             // Validate input
             if (empty($blogId)) {
-                echo 'Blog ID is required.';
-                return;
+                header('Location: /add-comment');
+                exit();
+            }
+
+            if (strlen($content) < 1 || strlen($content) > 500) {
+                header('Location: /add-comment');
+                exit();
             }
 
             try {
@@ -34,7 +39,7 @@ class AddCommentController
                 header('Location: /');
                 exit;
             } catch (\Exception $e) {
-                // Log the error or display a message
+                // Handle other exceptions
                 echo 'Failed to create comment: ' . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');
             }
         } else {

@@ -72,6 +72,9 @@ class BlogPost
         ]);
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function createComment($content, $blogId, $username)
     {
         $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
@@ -83,6 +86,16 @@ class BlogPost
         ])) {
             throw new \Exception('Error creating blog post.');
         }
+    }
+
+    public static function getCommentsById($id)
+    {
+        $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
+        $stmt = $db->prepare('SELECT content, user_name FROM comments WHERE blog_post_id =:blog_post_id');
+        $stmt->execute([
+            ':blog_post_id' => $id,
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }

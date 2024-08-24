@@ -47,6 +47,13 @@ class HomeController
             if ($category) {
                 $blog['category_name'] = $category['name'];
             }
+
+            $comments = BlogPost::getCommentsById($blog['id']);
+
+            if (!empty($comments)) {
+                $blog['comments'] = $comments;
+            }
+
         }
 
         $categories = Category::getCategories();

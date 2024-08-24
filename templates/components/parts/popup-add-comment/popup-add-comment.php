@@ -6,7 +6,8 @@
         <form action="/add-comment" id="add-comment-form-<?= $blog['id'] ?>" method="POST">
             <div class="add-comment-form-group">
                 <label for="comment-text-<?= $blog['id'] ?>">Comment:</label>
-                <textarea id="comment-text-<?= $blog['id'] ?>" name="comment" placeholder="Write your comment here..." required></textarea>
+                <textarea id="comment-text-<?= $blog['id'] ?>" name="comment" placeholder="Write your comment here..."></textarea>
+                <div id="comment-error-message-<?= $blog['id'] ?>" style="color: red; display: none;"></div>
             </div>
             <input type="hidden" id="delete-blog-id-<?= $blog['id'] ?>" name="id" value="<?= $blog['id'] ?>" />
             <button type="submit" class="save-comment-button" name="action" value="add-comment">Save</button>

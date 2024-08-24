@@ -30,5 +30,6 @@ CREATE TABLE IF NOT EXISTS comments (
     content VARCHAR(500) NOT NULL,
     user_name VARCHAR(30) NOT NULL,
     blog_post_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (blog_post_id) REFERENCES blog_posts(id) ON DELETE CASCADE
 );

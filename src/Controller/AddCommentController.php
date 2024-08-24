@@ -19,6 +19,11 @@ class AddCommentController
      */
     public function addComment(Request $request)
     {
+        if (!$this->blogService->isLoggedIn()) {
+            header('Location: /');
+            exit();
+        }
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'add-comment') {
             $blogId = isset($_POST['id']) ? $_POST['id'] : '';
             $content = isset($_POST['comment']) ? $_POST['comment'] : '';

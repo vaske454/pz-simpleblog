@@ -91,10 +91,22 @@ class BlogPost
     public static function getCommentsById($id)
     {
         $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
-        $stmt = $db->prepare('SELECT content, user_name FROM comments WHERE blog_post_id =:blog_post_id');
+        $stmt = $db->prepare('SELECT content, user_name FROM comments WHERE blog_post_id =:blog_post_id ORDER BY created_at DESC');
         $stmt->execute([
             ':blog_post_id' => $id,
         ]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getByCategoryId($selectedCategory)
+    {
+        $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
+
+        $stmt = $db->prepare('SELECT * FROM blog_posts WHERE category_id = :category_id ORDER BY publication_date DESC');
+        $stmt->bindParam(':category_id', $selectedCategory, PDO::PARAM_INT);
+
+        $stmt->execute();
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

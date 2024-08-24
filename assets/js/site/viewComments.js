@@ -15,7 +15,6 @@ const ViewComments = {
             event.preventDefault();
             // Get blog ID from data attribute
             const blogId = $(this).data('id');
-            console.log(blogId);
 
             // Show the specific popup
             $(`#view-comments-popup-${blogId}`).css('display', 'flex');

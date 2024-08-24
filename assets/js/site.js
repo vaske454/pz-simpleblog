@@ -5,6 +5,7 @@ import SingleBlogPopup from './site/singleBlogPopup';
 import AddComment from './site/addComment';
 import ViewComments from './site/viewComments';
 import CreateBlog from './site/createBlog';
+import FilterByCategory from './site/filterByCategory';
 
 // DOM ready
 jQuery(function() {
@@ -14,4 +15,5 @@ jQuery(function() {
     AddComment.init();
     ViewComments.init();
     CreateBlog.init();
+    FilterByCategory.init();
 });

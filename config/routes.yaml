@@ -26,6 +26,10 @@ add_comment:
   path: /add-comment
   controller: App\Controller\AddCommentController::addComment
 
+filter_by_category:
+  path: /filter-by-category
+  controller: App\Controller\HomeController::filterByCategories
+
 logout:
   path: /logout
   controller: App\Controller\LogoutController::logout

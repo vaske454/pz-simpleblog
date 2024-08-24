@@ -50,6 +50,9 @@ class Category
         try {
             $db = self::getConnection();
             $stmt = $db->query('SELECT id, name FROM categories ORDER BY name');
+            if ($stmt === false) {
+                return [];
+            }
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             // Handle the error as needed

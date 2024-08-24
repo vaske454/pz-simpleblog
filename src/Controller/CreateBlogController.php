@@ -28,9 +28,14 @@ class CreateBlogController
         }
 
         if ($request->isPost()) {
-            $title = $request->get('title');
-            $content = $request->get('content');
+            $title = trim($request->get('title'));
+            $content = trim($request->get('content'));
             $categoryId = $request->get('category_id');
+
+            if ($title === '' || $content === '') {
+                header('Location: /');
+                exit();
+            }
             $this->createBlogService->createBlogPost($title, $content, $categoryId);
 
             header('Location: /');

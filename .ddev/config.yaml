@@ -16,7 +16,10 @@ corepack_enable: false
 
 hooks:
     post-start:
-        - exec: "mysql < create_tables.sql && composer install && npm install npx webpack --mode production"
+        - exec: "mysql < create_tables.sql"
+        - exec: "composer install"
+        - exec: "npm install"
+        - exec: "npx webpack --mode production"
 
 # Key features of DDEV's config.yaml:
 

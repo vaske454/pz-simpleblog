@@ -4,6 +4,7 @@ import Register from './site/register';
 import SingleBlogPopup from './site/singleBlogPopup';
 import AddComment from './site/addComment';
 import ViewComments from './site/viewComments';
+import CreateBlog from './site/createBlog';
 
 // DOM ready
 jQuery(function() {
@@ -12,4 +13,5 @@ jQuery(function() {
     SingleBlogPopup.init();
     AddComment.init();
     ViewComments.init();
+    CreateBlog.init();
 });

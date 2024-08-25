@@ -3,6 +3,7 @@
 @import url('pages/login.css');
 @import url('pages/register.css');
 @import url('pages/create-blog.css');
+@import url('pages/404.css');
 
 /* Import component styles */
 @import url('components/parts/popup-login.css');

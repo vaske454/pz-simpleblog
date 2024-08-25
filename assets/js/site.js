@@ -6,6 +6,7 @@ import AddComment from './site/addComment';
 import ViewComments from './site/viewComments';
 import CreateBlog from './site/createBlog';
 import FilterByCategory from './site/filterByCategory';
+import PageNotFound from './site/pageNotFound';
 
 // DOM ready
 jQuery(function() {
@@ -16,4 +17,5 @@ jQuery(function() {
     ViewComments.init();
     CreateBlog.init();
     FilterByCategory.init();
+    PageNotFound.init();
 });

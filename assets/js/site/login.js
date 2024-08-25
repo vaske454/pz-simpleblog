@@ -5,11 +5,28 @@ const Login = {
 
     // Initialize
     init: function() {
-        this.bindLoginLinkClick();
-        this.bindPopupCloseClick();
-        this.bindWindowClick();
-        this.bindFormSubmit('.js-login-form');
-        this.bindFormSubmit('.js-login-popup');
+        // Check if the login link exists before binding click event
+        if ($('#login-link').length > 0) {
+            this.bindLoginLinkClick();
+        }
+
+        // Check if the popup close button exists before binding click event
+        if ($('#popup-close').length > 0) {
+            this.bindPopupCloseClick();
+        }
+
+        // Check if the login popup exists before binding window click event
+        if ($('#login-popup').length > 0) {
+            this.bindWindowClick();
+        }
+
+        // Check if the forms exist before binding submit events
+        if ($('.js-login-form').length > 0) {
+            this.bindFormSubmit('.js-login-form');
+        }
+        if ($('.js-login-popup').length > 0) {
+            this.bindFormSubmit('.js-login-popup');
+        }
     },
 
     bindLoginLinkClick: function() {

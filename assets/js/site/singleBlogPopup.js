@@ -7,6 +7,9 @@ const SingleBlogPopup = {
     popupBlogTitle: $('#popup-blog-title'),
     popupBlogContent: $('#popup-blog-content'),
     popupBlogCategory: $('#popup-blog-category'),
+    blogItemLink: $('.blog-item-link'),
+    blogPopupClose: $('.blog-popup-close'),
+    updateBlogForm: $('#update-blog-form'),
 
     // Initialize
     init: function () {
@@ -15,9 +18,22 @@ const SingleBlogPopup = {
 
     // Bind Events
     bindEvents: function () {
-        $('.blog-item-link').on('click', this.handleBlogClick);
-        $('.blog-popup-close').on('click', this.closeBlogPopup);
-        $('#update-blog-form').on('submit', this.validateForm);
+        // Check if blog-item-link exists before binding click event
+        if (SingleBlogPopup.blogItemLink.length > 0) {
+            $('.blog-item-link').on('click', this.handleBlogClick);
+        }
+
+        // Check if blog-popup-close exists before binding click event
+        if (SingleBlogPopup.blogPopupClose.length > 0) {
+            $('.blog-popup-close').on('click', this.closeBlogPopup);
+        }
+
+        // Check if update-blog-form exists before binding submit event
+        if (SingleBlogPopup.updateBlogForm.length > 0) {
+            $('#update-blog-form').on('submit', this.validateForm);
+        }
+
+        // Bind window click event
         this.bindWindowClick();
     },
 

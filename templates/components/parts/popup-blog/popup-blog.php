@@ -23,7 +23,7 @@
                         <label for="popup-blog-category">Category:</label>
                         <select name="category_id" id="popup-blog-category">
                             <?php foreach ($categories as $category): ?>
-                                <option value="<?= $category['id'] ?>"><?php echo $category['name']; ?></option>
+                                <option value="<?= $category['id'] ?>"><?php echo htmlspecialchars($category['name']); ?></option>
                             <?php endforeach; ?>
                         </select>
                     <?php endif; ?>

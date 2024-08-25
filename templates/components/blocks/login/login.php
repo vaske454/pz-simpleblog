@@ -5,9 +5,9 @@
         <div class="error-message js-error-message">
             <p><?php
                 // Format the error message with code and description
-                $message = 'Code: ' . htmlspecialchars($error_code, ENT_QUOTES, 'UTF-8') . ' - Message: ' . htmlspecialchars($error_message, ENT_QUOTES, 'UTF-8');
+                $message = 'Code: ' . $error_code . ' - Message: ' . $error_message;
                 // Output the formatted error message
-                echo $message;
+                echo htmlspecialchars($message,  ENT_QUOTES, 'UTF-8');
                 ?>
             </p>
         </div>

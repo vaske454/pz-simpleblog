@@ -6,7 +6,11 @@
         <select id="blog-select-options" class="blog-select-options">
             <option value="">All Posts</option>
             <?php foreach ($categories as $category): ?>
-            <option value="<?= $category['id'] ?>"><?php echo $category['name']; ?></option>
+            <?php if ($category['name']): ?>
+                <option value="<?= htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8'); ?>">
+                    <?php echo htmlspecialchars($category['name'], ENT_QUOTES, 'UTF-8'); ?>
+                </option>
+            <?php endif; ?>
             <?php endforeach; ?>
         </select>
         <?php endif; ?>

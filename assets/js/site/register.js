@@ -5,8 +5,15 @@ const Register = {
 
     // Initialize
     init: function() {
-        this.bindTogglePassword();
-        this.bindFormSubmit();
+        // Check if the toggle password button exists before binding click event
+        if ($('.js-toggle-password').length > 0) {
+            this.bindTogglePassword();
+        }
+
+        // Check if the register form exists before binding submit event
+        if ($('.js-register-form').length > 0) {
+            this.bindFormSubmit();
+        }
     },
 
     bindTogglePassword: function() {

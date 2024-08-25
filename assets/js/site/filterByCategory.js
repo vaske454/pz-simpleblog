@@ -7,7 +7,9 @@ const $ = jQuery.noConflict();
 'use strict';
 const FilterByCategory = {
     init: function() {
-        this.filterByCategory();
+        if ($('#blog-select-options').length > 0) {
+            this.filterByCategory();
+        }
     },
 
     filterByCategory: function() {

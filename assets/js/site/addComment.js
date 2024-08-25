@@ -5,10 +5,22 @@ const AddComment = {
 
     // Initialize
     init: function() {
-        this.bindAddCommentLinkClick();
-        this.bindAddCommentPopupCloseClick();
-        this.bindWindowClick();
-        this.bindCommentFormSubmit();
+        // Check if elements exist before binding events
+        if ($('.js-add-comment').length > 0) {
+            this.bindAddCommentLinkClick();
+        }
+
+        if ($('.add-comment-close-popup').length > 0) {
+            this.bindAddCommentPopupCloseClick();
+        }
+
+        if ($('.js-add-comment-popup').length > 0) {
+            this.bindWindowClick();
+        }
+
+        if ($('form[id^="add-comment-form-"]').length > 0) {
+            this.bindCommentFormSubmit();
+        }
     },
 
     bindAddCommentLinkClick: function() {

@@ -5,8 +5,12 @@ const ViewComments = {
 
     // Initialize
     init: function() {
-        this.bindViewCommentsLinkClick();
-        this.bindViewCommentsPopupCloseClick();
+        if ($('.js-view-comments').length > 0) {
+            this.bindViewCommentsLinkClick();
+        }
+        if ($('.js-view-comments-close-popup').length > 0) {
+            this.bindViewCommentsPopupCloseClick();
+        }
         this.bindWindowClick();
     },
 
@@ -22,7 +26,7 @@ const ViewComments = {
     },
 
     bindViewCommentsPopupCloseClick: function() {
-        $(document).on('click', '.js-view-comments-close-popup', function() {
+        $('.js-view-comments-close-popup').on('click', function() {
             $(this).closest('.js-view-comments-popup').css('display', 'none');
         });
     },

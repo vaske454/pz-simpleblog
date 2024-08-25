@@ -5,7 +5,10 @@ const CreateBlog = {
 
     // Initialize
     init: function () {
-        this.bindFormValidation();
+        // Check if the form element exists before binding validation
+        if ($('#create-blog-form').length > 0) {
+            this.bindFormValidation();
+        }
     },
 
     // Function to bind form validation

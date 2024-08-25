@@ -50,7 +50,8 @@ class Router
         $path = $request->getPath();
 
         if (!array_key_exists($path, $this->routes)) {
-            return new Response('404 Not Found');
+            $view = new View(__DIR__ . '/../../templates/pages/404.php');
+            return new Response($view->render());
         }
 
         $controllerInfo = $this->routes[$path];

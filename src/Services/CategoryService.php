@@ -20,6 +20,8 @@ class CategoryService
         foreach ($requiredCategories as $category) {
             if (!$this->categoryModel->categoryExists($category)) {
                 $this->categoryModel->insertCategory($category);
+            } else {
+                return;
             }
         }
     }

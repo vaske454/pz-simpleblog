@@ -15,6 +15,19 @@ class Category
         $this->db = Connection::getInstance();
     }
 
+    private function tableExists()
+    {
+        try {
+            $stmt = $this->db->prepare("SHOW TABLES LIKE :tableName");
+            $stmt->execute(['tableName' => 'categories']);
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            // Handle the error as needed
+            error_log('Error checking table existence: ' . $e->getMessage());
+            return false;
+        }
+    }
+
     public function categoryExists($name)
     {
         try {
@@ -32,6 +45,10 @@ class Category
     {
         try {
             $stmt = $this->db->prepare('INSERT INTO categories (name) VALUES (:name)');
+            if (!$this->tableExists()) {
+                error_log('Table categories does not exist.');
+                return;
+            }
             $stmt->execute(['name' => $name]);
         } catch (PDOException $e) {
             // Handle the error as needed
@@ -57,6 +74,11 @@ class Category
 
     public function getCategoryById($id)
     {
+        if (!$this->tableExists()) {
+            error_log('Table categories does not exist.');
+            return null;
+        }
+
         try {
             $stmt = $this->db->prepare('SELECT name FROM categories WHERE id = :id');
             $stmt->execute([':id' => $id]);

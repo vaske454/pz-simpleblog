@@ -2,15 +2,15 @@
 
 namespace App\Controller;
 
-use App\Service\BlogService;
+use App\Services\BlogService;
 
 class UpdateBlogController
 {
     private $blogService;
 
-    public function __construct()
+    public function __construct(BlogService $blogService)
     {
-        $this->blogService = new BlogService();
+        $this->blogService = $blogService;
     }
 
     public function updateBlogPost()
@@ -20,7 +20,6 @@ class UpdateBlogController
             $content = isset($_POST['content']) ? $_POST['content'] : '';
             $categoryId = isset($_POST['category_id']) ? $_POST['category_id'] : '';
             $blogId = isset($_POST['id']) ? $_POST['id'] : '';
-
 
             // Validate input
             if (empty($title) || empty($content) || empty($categoryId) || empty($blogId)) {

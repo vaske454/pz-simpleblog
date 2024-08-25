@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Http\Request;
 use App\Http\Response;
-use App\Service\View;
-use App\Service\RegistrationService;
+use App\Services\View;
+use App\Services\RegistrationService;
 use App\Exception\RegistrationException;
 
 class RegisterController

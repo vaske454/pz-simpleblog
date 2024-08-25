@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Http\Request;
-use App\Service\LogoutService;
+use App\Services\LogoutService;
 use App\Exception\SessionException;
 
 class LogoutController

@@ -6,16 +6,23 @@ use App\Http\Request;
 use App\Http\Response;
 use App\Model\Category;
 use App\Model\User;
-use App\Service\View;
+use App\Services\View;
 use App\Model\BlogPost;
 use DateTime;
 
 class HomeController
 {
+    private $categoryModel;
+    private $userModel;
+    private $blogPostModel;
+
     public function __construct()
     {
         // Start the session for all requests to the controller
         session_start();
+        $this->categoryModel = new Category();
+        $this->userModel = new User();
+        $this->blogPostModel = new BlogPost();
     }
 
     /**
@@ -24,39 +31,33 @@ class HomeController
     public function index(Request $request)
     {
         $title = 'Home - My Blog';
-        $blogs = BlogPost::getAll();
-        $currentUser = User::getCurrentUser();
+        $blogs = $this->blogPostModel->getAll();
+        $currentUser = $this->userModel->getCurrentUser();
 
         foreach ($blogs as &$blog) {
-            $user = User::getUsernameById($blog['user_id']);
+            $user = $this->userModel->getUsernameById($blog['user_id']);
             if ($user) {
                 $blog['username'] = $user['username'];
             }
 
-            if ($blog['user_id'] === $currentUser['id']) {
-                $blog['is_my_post'] = true;
-            } else {
-                $blog['is_my_post'] = false;
-            }
+            $blog['is_my_post'] = ($blog['user_id'] === $currentUser['id']);
 
             $date = new DateTime($blog['publication_date']);
             $dateOnly = $date->format('d-m-Y');
             $blog['publication_date'] = $dateOnly;
 
-            $category = Category::getCategoryById($blog['category_id']);
+            $category = $this->categoryModel->getCategoryById($blog['category_id']);
             if ($category) {
                 $blog['category_name'] = $category['name'];
             }
 
-            $comments = BlogPost::getCommentsById($blog['id']);
-
+            $comments = $this->blogPostModel->getCommentsById($blog['id']);
             if (!empty($comments)) {
                 $blog['comments'] = $comments;
             }
-
         }
 
-        $categories = Category::getCategories();
+        $categories = $this->categoryModel->getCategories();
 
         $view = new View(__DIR__ . '/../../templates/pages/home.php', $title, ['blogs' => $blogs, 'categories' => $categories]);
 
@@ -69,38 +70,33 @@ class HomeController
     public function filterByCategories(Request $request)
     {
         $selectedCategory = $request->get('category');
-        $currentUser = User::getCurrentUser();
+        $currentUser = $this->userModel->getCurrentUser();
 
         if (!empty($selectedCategory)) {
-            $blogs = BlogPost::getByCategoryId($selectedCategory);
+            $blogs = $this->blogPostModel->getByCategoryId($selectedCategory);
         } else {
-            $blogs = BlogPost::getAll();
+            $blogs = $this->blogPostModel->getAll();
         }
 
         ob_start();
         foreach ($blogs as &$blog) {
-            $user = User::getUsernameById($blog['user_id']);
+            $user = $this->userModel->getUsernameById($blog['user_id']);
             if ($user) {
                 $blog['username'] = $user['username'];
             }
 
-            if ($blog['user_id'] === $currentUser['id']) {
-                $blog['is_my_post'] = true;
-            } else {
-                $blog['is_my_post'] = false;
-            }
+            $blog['is_my_post'] = ($blog['user_id'] === $currentUser['id']);
 
             $date = new DateTime($blog['publication_date']);
             $dateOnly = $date->format('d-m-Y');
             $blog['publication_date'] = $dateOnly;
 
-            $category = Category::getCategoryById($blog['category_id']);
+            $category = $this->categoryModel->getCategoryById($blog['category_id']);
             if ($category) {
                 $blog['category_name'] = $category['name'];
             }
 
-            $comments = BlogPost::getCommentsById($blog['id']);
-
+            $comments = $this->blogPostModel->getCommentsById($blog['id']);
             if (!empty($comments)) {
                 $blog['comments'] = $comments;
             }

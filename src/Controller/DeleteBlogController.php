@@ -2,15 +2,15 @@
 
 namespace App\Controller;
 
-use App\Service\BlogService;
+use App\Services\BlogService;
 
 class DeleteBlogController
 {
     private $blogService;
 
-    public function __construct()
+    public function __construct(BlogService $blogService)
     {
-        $this->blogService = new BlogService();
+        $this->blogService = $blogService;
     }
 
     public function deleteBlogPost()

@@ -2,19 +2,25 @@
 
 namespace App\Model;
 
+use App\Core\Database\Connection;
 use PDO;
 use PDOException;
 
 class BlogPost
 {
+    private $db;
+
+    public function __construct()
+    {
+        $this->db = Connection::getInstance();
+    }
 
     /**
      * @throws \Exception
      */
-    public static function create($title, $content, $userId, $categoryId)
+    public function create($title, $content, $userId, $categoryId)
     {
-        $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
-        $stmt = $db->prepare('INSERT INTO blog_posts (title, content, user_id, category_id) VALUES (:title, :content, :user_id, :category_id)');
+        $stmt = $this->db->prepare('INSERT INTO blog_posts (title, content, user_id, category_id) VALUES (:title, :content, :user_id, :category_id)');
         if (!$stmt->execute([
             ':title' => $title,
             ':content' => $content,
@@ -25,22 +31,21 @@ class BlogPost
         }
     }
 
-    public static function getAll()
+    public function getAll()
     {
         try {
-            $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
             // Set error mode to exception
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             // Check if the table exists
-            $tableCheckStmt = $db->query('SHOW TABLES LIKE "blog_posts"');
+            $tableCheckStmt = $this->db->query('SHOW TABLES LIKE "blog_posts"');
             if ($tableCheckStmt->rowCount() == 0) {
                 // Table does not exist
                 return []; // or handle the case as needed
             }
 
             // Fetch data from the table
-            $stmt = $db->query('SELECT id, title, content, user_id, publication_date, category_id FROM blog_posts ORDER BY publication_date DESC');
+            $stmt = $this->db->query('SELECT id, title, content, user_id, publication_date, category_id FROM blog_posts ORDER BY publication_date DESC');
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             // Handle any errors, such as connection issues
@@ -49,10 +54,9 @@ class BlogPost
         }
     }
 
-    public static function update($blogId, $title, $content, $userId, $categoryId)
+    public function update($blogId, $title, $content, $userId, $categoryId)
     {
-        $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
-        $stmt = $db->prepare('UPDATE blog_posts SET title = :title, content = :content, category_id = :category_id WHERE id = :id AND user_id = :user_id');
+        $stmt = $this->db->prepare('UPDATE blog_posts SET title = :title, content = :content, category_id = :category_id WHERE id = :id AND user_id = :user_id');
         $stmt->execute([
             ':title' => $title,
             ':content' => $content,
@@ -62,10 +66,9 @@ class BlogPost
         ]);
     }
 
-    public static function delete($blogId, $userId)
+    public function delete($blogId, $userId)
     {
-        $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
-        $stmt = $db->prepare('DELETE FROM blog_posts WHERE id = :id AND user_id = :user_id');
+        $stmt = $this->db->prepare('DELETE FROM blog_posts WHERE id = :id AND user_id = :user_id');
         $stmt->execute([
             ':id' => $blogId,
             ':user_id' => $userId
@@ -75,39 +78,34 @@ class BlogPost
     /**
      * @throws \Exception
      */
-    public static function createComment($content, $blogId, $username)
+    public function createComment($content, $blogId, $username)
     {
-        $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
-        $stmt = $db->prepare('INSERT INTO comments (content, user_name, blog_post_id) VALUES (:content, :user_name, :blog_post_id)');
+        $stmt = $this->db->prepare('INSERT INTO comments (content, user_name, blog_post_id) VALUES (:content, :user_name, :blog_post_id)');
         if (!$stmt->execute([
             ':content' => $content,
             ':user_name' => $username,
             ':blog_post_id' => $blogId,
         ])) {
-            throw new \Exception('Error creating blog post.');
+            throw new \Exception('Error creating comment.');
         }
     }
 
-    public static function getCommentsById($id)
+    public function getCommentsById($id)
     {
-        $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
-        $stmt = $db->prepare('SELECT content, user_name FROM comments WHERE blog_post_id =:blog_post_id ORDER BY created_at DESC');
+        $stmt = $this->db->prepare('SELECT content, user_name FROM comments WHERE blog_post_id = :blog_post_id ORDER BY created_at DESC');
         $stmt->execute([
             ':blog_post_id' => $id,
         ]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function getByCategoryId($selectedCategory)
+    public function getByCategoryId($selectedCategory)
     {
-        $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
-
-        $stmt = $db->prepare('SELECT * FROM blog_posts WHERE category_id = :category_id ORDER BY publication_date DESC');
+        $stmt = $this->db->prepare('SELECT * FROM blog_posts WHERE category_id = :category_id ORDER BY publication_date DESC');
         $stmt->bindParam(':category_id', $selectedCategory, PDO::PARAM_INT);
 
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
 }

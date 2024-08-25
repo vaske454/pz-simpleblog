@@ -2,27 +2,23 @@
 
 namespace App\Model;
 
+use App\Core\Database\Connection;
 use PDO;
 use PDOException;
 
 class Category
 {
-    private static function getConnection()
+    private $db;
+
+    public function __construct()
     {
-        try {
-            return new PDO('mysql:host=db;dbname=db', 'db', 'db');
-        } catch (PDOException $e) {
-            // Log the error and rethrow if needed
-            error_log('Database connection error: ' . $e->getMessage());
-            throw $e;
-        }
+        $this->db = Connection::getInstance();
     }
 
-    public static function categoryExists($name)
+    public function categoryExists($name)
     {
         try {
-            $db = self::getConnection();
-            $stmt = $db->prepare('SELECT COUNT(*) FROM categories WHERE name = :name');
+            $stmt = $this->db->prepare('SELECT COUNT(*) FROM categories WHERE name = :name');
             $stmt->execute(['name' => $name]);
             return $stmt->fetchColumn() > 0;
         } catch (PDOException $e) {
@@ -32,11 +28,10 @@ class Category
         }
     }
 
-    public static function insertCategory($name)
+    public function insertCategory($name)
     {
         try {
-            $db = self::getConnection();
-            $stmt = $db->prepare('INSERT INTO categories (name) VALUES (:name)');
+            $stmt = $this->db->prepare('INSERT INTO categories (name) VALUES (:name)');
             $stmt->execute(['name' => $name]);
         } catch (PDOException $e) {
             // Handle the error as needed
@@ -45,11 +40,10 @@ class Category
         }
     }
 
-    public static function getCategories()
+    public function getCategories()
     {
         try {
-            $db = self::getConnection();
-            $stmt = $db->query('SELECT id, name FROM categories ORDER BY name');
+            $stmt = $this->db->query('SELECT id, name FROM categories ORDER BY name');
             if ($stmt === false) {
                 return [];
             }
@@ -61,11 +55,10 @@ class Category
         }
     }
 
-    public static function getCategoryById($id)
+    public function getCategoryById($id)
     {
         try {
-            $db = self::getConnection();
-            $stmt = $db->prepare('SELECT name FROM categories WHERE id = :id');
+            $stmt = $this->db->prepare('SELECT name FROM categories WHERE id = :id');
             $stmt->execute([':id' => $id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {

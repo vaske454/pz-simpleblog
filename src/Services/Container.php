@@ -1,13 +1,18 @@
 <?php
 
-namespace App\Service;
+namespace App\Services;
 
+
+use App\Controller\AddCommentController;
 use App\Controller\CreateBlogController;
+use App\Controller\DeleteBlogController;
 use App\Controller\LoginController;
 use App\Controller\RegisterController;
 use App\Controller\LogoutController;
+use App\Controller\UpdateBlogController;
+use App\Model\BlogPost;
+use App\Model\User;
 use Exception;
-use PDO;
 use PDOException;
 
 class Container
@@ -32,9 +37,33 @@ class Container
         $this->services[CreateBlogController::class] = function() {
             return new CreateBlogController($this->get(BlogService::class));
         };
-        $this->services[BlogService::class] = function() {
-            return new BlogService();
+        $this->services[UpdateBlogController::class] = function() {
+            return new UpdateBlogController($this->get(BlogService::class));
         };
+
+        // Register DeleteBlogController
+        $this->services[DeleteBlogController::class] = function() {
+            return new DeleteBlogController($this->get(BlogService::class));
+        };
+
+        // Register AddCommentController
+        $this->services[AddCommentController::class] = function() {
+            return new AddCommentController($this->get(BlogService::class));
+        };
+
+        // Register BlogService with BlogPost dependency
+        $this->services[BlogService::class] = function() {
+            return new BlogService($this->get(BlogPost::class));
+        };
+
+        // Register BlogPost model
+        $this->services[BlogPost::class] = function() {
+            return new BlogPost();
+        };
+        $this->services[User::class] = function() {
+            return new User();
+        };
+
         $this->services[LogoutController::class] = function() {
             return new LogoutController($this->get(LogoutService::class));
         };

@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Core\Database\Connection;
 use App\Exception\RegistrationException;
 use PDO;
 
@@ -12,7 +13,7 @@ class User
 
     public static function authenticate($username, $password)
     {
-        $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
+        $db = Connection::getInstance();
         $stmt = $db->prepare('SELECT * FROM users WHERE username = :username');
         $stmt->execute(['username' => $username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -32,8 +33,8 @@ class User
      */
     public static function create($username, $password)
     {
-        $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+        $db = Connection::getInstance();
         $stmt = $db->prepare('INSERT INTO users (username, password) VALUES (:username, :password)');
         if ($stmt->execute(['username' => $username, 'password' => $passwordHash])) {
             return self::authenticate($username, $password);
@@ -44,7 +45,7 @@ class User
 
     public static function getUsernameById($id)
     {
-        $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
+        $db = Connection::getInstance();
         $stmt = $db->prepare('SELECT username FROM users WHERE id = :id');
         $stmt->execute([':id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -52,7 +53,7 @@ class User
 
     public static function getById($id)
     {
-        $db = new PDO('mysql:host=db;dbname=db', 'db', 'db');
+        $db = Connection::getInstance();
         $stmt = $db->prepare('SELECT id, username FROM users WHERE id = :id');
         $stmt->execute([':id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);

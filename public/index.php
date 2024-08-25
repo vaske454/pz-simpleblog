@@ -3,8 +3,8 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Http\Request;
-use App\Service\Container;
-use App\Service\Router;
+use App\Services\Container;
+use App\Services\Router;
 use App\Http\Response;
 
 // Create a dependency injection container

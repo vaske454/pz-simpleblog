@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
+use App\Exception\RegistrationException;
 use App\Http\Request;
 use App\Http\Response;
-use App\Services\View;
 use App\Services\RegistrationService;
-use App\Exception\RegistrationException;
+use App\View\View;
 
 class RegisterController
 {

@@ -4,10 +4,10 @@ namespace App\Controller;
 
 use App\Http\Request;
 use App\Http\Response;
+use App\Model\BlogPost;
 use App\Model\Category;
 use App\Model\User;
-use App\Services\View;
-use App\Model\BlogPost;
+use App\View\View;
 use DateTime;
 
 class HomeController

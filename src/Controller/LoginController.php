@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
+use App\Exception\AuthenticationException;
 use App\Http\Request;
 use App\Http\Response;
-use App\Services\View;
 use App\Services\LoginService;
-use App\Exception\AuthenticationException;
+use App\View\View;
 
 class LoginController
 {

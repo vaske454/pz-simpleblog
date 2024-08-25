@@ -1,17 +1,20 @@
 <?php
-
-namespace App\Services;
-
+namespace App\Core;
 
 use App\Controller\AddCommentController;
 use App\Controller\CreateBlogController;
 use App\Controller\DeleteBlogController;
 use App\Controller\LoginController;
-use App\Controller\RegisterController;
 use App\Controller\LogoutController;
+use App\Controller\RegisterController;
 use App\Controller\UpdateBlogController;
 use App\Model\BlogPost;
 use App\Model\User;
+use App\Services\BlogService;
+use App\Services\CategoryService;
+use App\Services\LoginService;
+use App\Services\LogoutService;
+use App\Services\RegistrationService;
 use Exception;
 use PDOException;
 

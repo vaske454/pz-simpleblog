@@ -1,10 +1,10 @@
 <?php
-
-namespace App\Services;
+namespace App\Core;
 
 use App\Http\Request;
 use App\Http\Response;
 use App\Util\YamlParser;
+use App\View\View;
 
 class Router
 {

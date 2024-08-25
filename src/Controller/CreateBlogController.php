@@ -4,9 +4,9 @@ namespace App\Controller;
 
 use App\Http\Request;
 use App\Http\Response;
-use App\Services\BlogService;
 use App\Model\Category;
-use App\Services\View;
+use App\Services\BlogService;
+use App\View\View;
 
 class CreateBlogController
 {

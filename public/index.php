@@ -2,9 +2,9 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use App\Core\Container;
+use App\Core\Router;
 use App\Http\Request;
-use App\Services\Container;
-use App\Services\Router;
 use App\Http\Response;
 
 // Create a dependency injection container
